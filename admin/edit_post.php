@@ -41,7 +41,7 @@
 
             header("Location: posts.php");
 
-           
+              
 
             }
     
