@@ -42,7 +42,7 @@
             header("Location: posts.php");
 
               
-
+  
             }
     
     
