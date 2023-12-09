@@ -33,7 +33,7 @@
             $content = $_POST['post_content'];
 
 
-                    
+                    move_uploaded_file($image_file,"../image/$image");
 
             $sql  = "UPDATE posts SET post_title = '$title', post_category_id=$category, post_author= '$author',
                     post_status='$status', post_tags= '$tags', post_content='$content' where post_id = $id";
@@ -62,7 +62,7 @@
         <div class="form-group">
 
 
-        <select name="category" >
+        <select name="category_id_Select" >
 
         <?php while($rowInner= mysqli_fetch_assoc($a)){ ?>
 
