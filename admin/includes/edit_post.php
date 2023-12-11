@@ -33,10 +33,41 @@
             $content = $_POST['post_content'];
 
 
-                    move_uploaded_file($image_file,"../image/$image");
+            move_uploaded_file($image_file,"../image/$image");  
+
+
+
+            if(empty($image)){
+
+               
+            $sql = "SELECT * FROM posts where post_id= $id";
+            $select_image = mysqli_query($conn, $sql);
+           
+
+
+
+           while ($row = mysqli_fetch_assoc($select_image)){
+
+
+            $post_image = $row['post_image'];
+
+          
+
+            }
+
+      
+
+         }
+
+
+
+           
+
+           
+
 
             $sql  = "UPDATE posts SET post_title = '$title', post_category_id=$category, post_author= '$author',
-                    post_status='$status', post_tags= '$tags', post_content='$content' where post_id = $id";
+                    post_status='$status', post_tags= '$tags', post_image= '$image', post_content='$content' where post_id = $id";
             $post_update = mysqli_query($conn,$sql);
 
             header("Location: posts.php");
@@ -44,6 +75,8 @@
               
   
             }
+
+        
     
     
     ?> 
@@ -62,7 +95,7 @@
         <div class="form-group">
 
 
-        <select name="category_id_Select" >
+        <select name="category" >
 
         <?php while($rowInner= mysqli_fetch_assoc($a)){ ?>
 

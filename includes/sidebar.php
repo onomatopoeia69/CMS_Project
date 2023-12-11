@@ -37,14 +37,18 @@
                     
                     <div class="col-lg-12">
                     <ul class="list-unstyled">
-                
+
+                  
+                    
                     <?php 
                                 $sql = "SELECT * FROM category";
                                 $select_category = mysqli_query($conn,$sql);
 
-                            while($row= mysqli_fetch_assoc($select_category)): ?>
+                    ?>
+
+                   <?php         while($row= mysqli_fetch_assoc($select_category)): ?>
                             
-                            <li><a href="#"><?php echo $row['cat_title']; ?></a>
+                            <li><a href="category.php?category=<?php echo $row['cat_id']; ?>"><?php echo $row['cat_title']; ?></a>
                             </li>
                             <?php endwhile; ?> 
                     </ul>

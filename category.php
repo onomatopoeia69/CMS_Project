@@ -15,13 +15,25 @@
             
 
             <?php 
+            if (isset($_GET['category'])){
 
-            $sql = "Select * FROM posts";
+            $cat_id = $_GET['category'];
+
+
+            $sql = "Select * FROM posts WHERE post_category_id=$cat_id";
             $select_all_post= mysqli_query($conn,$sql);
-           
+            } ?>
         
+            <?php if(mysqli_num_rows($select_all_post) == 0):  ?>
 
-             while($row= mysqli_fetch_assoc($select_all_post)):?>
+                <h1>NO RESULTS</h1>
+
+
+
+            <?php else: ?>
+                
+
+           <?php   while($row= mysqli_fetch_assoc($select_all_post)):?>
 
                 <h1 class="page-header">
                     Page Heading
@@ -39,12 +51,14 @@
                 <hr>
                 <img class="img-responsive" src="image/<?=$row['post_image']; ?>" alt="">
                 <hr>
-                <p><?php echo substr($row['post_content'],0,50); ?></p>
-                <a class="btn btn-primary" href="">Read More<span class="glyphicon glyphicon-chevron-right"></span></a>
+                <p><?php echo $row['post_content']; ?></p>
+                <a class="btn btn-primary" href="#">Read More<span class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
 
              <?php endwhile; ?>
+
+             <?php endif; ?> 
         
                 
             </div>

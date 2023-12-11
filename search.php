@@ -35,6 +35,7 @@
             }else{ 
 
                 echo "<h1>Search Results</h1>";
+
                     while($row= mysqli_fetch_assoc($search_query)):?>
 
         
@@ -42,10 +43,12 @@
                             Page Heading
                             <small>Secondary Text</small>
                         </h1>
+
+                            <?php  ?> 
         
                         <!-- First Blog Post -->
                         <h2>
-                            <a href="#"><?php echo $row['post_title'];   ?></a>
+                            <a href="post.php?post_id=<?php echo $row['post_id'];?>"><?php echo $row['post_title'];   ?></a>
                         </h2>
                         <p class="lead">
                             by <a href="index.php"><?php echo $row['post_author'];?></a>

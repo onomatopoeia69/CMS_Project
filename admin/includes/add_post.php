@@ -4,7 +4,7 @@
         if(isset($_POST['create_post'])){
 
             $title = $_POST['title'];
-            $post_cat_id = $_POST['post_category_id'];
+            $post_cat_id = $_POST['category_id'];
             $post_author = $_POST['author'];
             $post_status = $_POST['post_status'];
 
@@ -50,8 +50,20 @@
         </div>
 
         <div class="form-group">
-            <label for="title">Post Category</label>
-            <input type="text" class="form-control" name="post_category_id">
+
+
+        <select name="category_id" >
+
+        
+        <?php $a= GetCatData($conn);?>
+
+        <?php while($row= mysqli_fetch_assoc($a)){ ?>
+
+        <option value="<?php echo $row['cat_id']; ?>"><?php echo $row['cat_title']; ?></option>
+        <?php } ?>
+
+            </select>
+
         </div>
 
         <div class="form-group">

@@ -168,3 +168,37 @@
         }  
 
      }
+
+
+      function GetCommentData($conn){
+
+
+        $sql = "SELECT * FROM comments";
+        $comments_query = mysqli_query($conn,$sql);
+
+        return $comments_query;
+
+
+      }
+
+      function deleteComment($conn){
+
+        
+        if(isset($_GET['delete'])){
+
+            $id = $_GET['delete'];
+
+
+            $sql = "DELETE FROM comments WHERE comment_id ='$id' ";
+            $delete_cat = mysqli_query($conn, $sql);
+            header("Location: comments.php");
+
+            if(!$delete_cat){
+
+                die('QUERY FAILED'.mysqli_error($conn));
+
+            }
+
+        }  
+
+     }
