@@ -202,3 +202,35 @@
         }  
 
      }
+
+
+
+     function UnapproveStatus($conn){
+
+        if(isset($_GET['unapprove'])){
+
+            $comment_id = $_GET['unapprove'];
+
+
+            $sql = "UPDATE comments SET comment_status = 'unapproved' WHERE comment_id = $comment_id ";
+            mysqli_query($conn, $sql);
+            header("Location: comments.php");
+        }
+
+     }
+
+
+     
+     function ApproveStatus($conn){
+
+        if(isset($_GET['approve'])){
+
+            $comment_id = $_GET['approve'];
+
+
+            $sql = "UPDATE comments SET comment_status = 'approved' WHERE comment_id = $comment_id ";
+            mysqli_query($conn, $sql);
+            header("Location: comments.php");
+        }
+
+     }

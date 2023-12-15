@@ -15,6 +15,7 @@
             
 
             <?php 
+            
             if (isset($_GET['category'])){
 
             $cat_id = $_GET['category'];
