@@ -20,6 +20,10 @@
                                 <th>Tags</th>
                                 <th>Comments</th>
                                 <th>Date</th>
+                                <th>Delete</th>
+                                <th>Edit</th>
+
+
                               
                             </tr>
                         </thead>
@@ -54,7 +58,9 @@
                             <td><?php echo $row_Post['post_status'];?></td>
                             <td><img width='100' src="../image/<?php echo $row_Post['post_image'];?>"></td>
                             <td><?php echo $row_Post['post_tags'];?></td>
+
                             <td><?php echo $row_Post['post_comment_count'];?></td>
+
                             <td><?php echo $row_Post['post_date'];?></td>
                             <td><a href="posts.php?delete=<?php echo $row_Post['post_id'];?>">Delete</a></td>
                             <td><a href="posts.php?source=edit_post&edit=<?php echo $row_Post['post_id']; ?>">Edit</a></td>

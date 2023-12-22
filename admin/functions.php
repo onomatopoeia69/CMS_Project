@@ -191,13 +191,17 @@
 
             $sql = "DELETE FROM comments WHERE comment_id ='$id' ";
             $delete_cat = mysqli_query($conn, $sql);
-            header("Location: comments.php");
+    
+
 
             if(!$delete_cat){
 
                 die('QUERY FAILED'.mysqli_error($conn));
 
             }
+
+
+           
 
         }  
 
@@ -234,3 +238,13 @@
         }
 
      }
+
+
+     function GetUsersData($conn){
+                
+        $sql = "SELECT * FROM users"; 
+        $post_query = mysqli_query($conn, $sql); 
+        return $post_query;
+
+     }
+

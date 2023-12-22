@@ -42,12 +42,10 @@
                
             $sql = "SELECT * FROM posts where post_id= $id";
             $select_image = mysqli_query($conn, $sql);
-           
-
-
 
            while ($row = mysqli_fetch_assoc($select_image)){
 
+            
 
             $post_image = $row['post_image'];
 
@@ -84,12 +82,26 @@
 
     
 <?php while($row = mysqli_fetch_assoc($post_value)): ?>
+    <?php 
+
+            $title = $row['post_title'];
+            $post_tags= $row['post_tags'];
+            $author = $row['post_author'];
+            $post_status=  $row['post_status'];
+            $image = $row['post_image'];
+
+
+            $content = $row['post_content'];
+
+
+
+    ?>
 
 <form action="" method="post" enctype="multipart/form-data">
        
         <div class="form-group">
             <label for="title">Post Title</label>
-            <input type="text" class="form-control"  name="title"   value="<?php echo $row['post_title'];?>">
+            <input type="text" class="form-control"  name="title"   value="<?php echo $title;?>">
         </div>
 
         <div class="form-group">
@@ -97,10 +109,20 @@
 
         <select name="category" >
 
-        <?php while($rowInner= mysqli_fetch_assoc($a)){ ?>
+        <?php while($rowInner= mysqli_fetch_assoc($a)): ?>
 
-        <option value="<?php echo $rowInner['cat_id']; ?>"><?php echo $rowInner['cat_title']; ?></option>
-        <?php } ?>
+            <?php 
+
+                $cat_id = $rowInner['cat_id']; 
+                $cat_title =$rowInner['cat_title'];
+
+               
+             ?>
+
+
+        <option value="<?php echo $cat_id; ?>"><?php echo $cat_title; ?></option>
+
+        <?php endwhile; ?>
 
             </select>
         
@@ -115,25 +137,25 @@
 
         <div class="form-group">
             <label for="title">Post Status</label>
-            <input type="text" class="form-control"  value="<?php echo $row['post_status'];?>" name="post_status">
+            <input type="text" class="form-control"  value="<?php echo $post_status;?>" name="post_status">
         </div>
 
         <div class="form-group">
             <label for="title">Post Images</label>
             <input type="file" name="image">
-            <img width="300 " src="../image/<?php echo $row['post_image']?>" alt="image">
+            <img width="300 " src="../image/<?php echo $image?>" alt="image">
         </div>
 
         <div class="form-group">
             <label for="title">Post Tags</label>
-            <input type="text" class="form-control" name="post_tags" value="<?php echo $row['post_tags']; ?>">
+            <input type="text" class="form-control" name="post_tags" value="<?php echo $post_tags; ?>">
         </div>
         
         
 
         <div class="form-group">
             <label for="title">Post Content</label>
-            <textarea type="text" class="form-control" name="post_content"  id="" cols="30" rows="10" ><?php echo $row['post_content'];?>
+            <textarea type="text" class="form-control" name="post_content"  id="" cols="30" rows="10" ><?php echo $content;?>
             </textarea>
         </div>
        

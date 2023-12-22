@@ -24,7 +24,7 @@
 
             $search = htmlspecialchars($_POST['search']);
 
-            $sql = "SELECT * FROM posts WHERE CONCAT_WS('',post_author,post_tags) LIKE '%$search%' ";
+            $sql = "SELECT * FROM posts WHERE CONCAT_WS('',post_title,post_author,post_tags) LIKE '%$search%' ";
             $search_query = mysqli_query($conn, $sql); 
   
             if(mysqli_num_rows($search_query) == 0 ){

@@ -16,12 +16,20 @@
 
             <?php 
 
-            $sql = "Select * FROM posts";
+            $sql = "Select * FROM posts WHERE post_status= 'Published' ORDER BY post_date DESC ";
             $select_all_post= mysqli_query($conn,$sql);
            
-        
+            ?>
 
-             while($row= mysqli_fetch_assoc($select_all_post)):?>
+          <?php       
+                if(mysqli_num_rows($select_all_post) === 0) : ?>
+
+                        <h1 class="text-center">No Post Result</h1>
+
+                 <?php else: 
+    
+    
+                 while($row= mysqli_fetch_assoc($select_all_post)):?>
 
                 <h1 class="page-header">
                     Page Heading
@@ -35,7 +43,7 @@
                 <p class="lead">
                     by <a href="index.php"><?php echo $row['post_author'];?></a>
                 </p>
-                <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo  $row['post_date']; ?></p>
+                <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo  date('M d Y',strtotime($row['post_date'])); ?></p>
                 <hr>
                 <img class="img-responsive" src="image/<?=$row['post_image']; ?>" alt="">
                 <hr>
@@ -45,6 +53,7 @@
                 <hr>
 
              <?php endwhile; ?>
+             <?php endif;?>
         
                 
             </div>

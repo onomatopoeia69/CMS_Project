@@ -67,12 +67,19 @@
                                     VALUES ($post_id, '$comment_author', '$email', '$comment_content','unapproved',NOW())";
                         $comment_query = mysqli_query($conn, $sql);
 
+                         
+         
+                     $sql2 = "UPDATE posts set post_comment_count = post_comment_count + 1  WHERE post_id = $post_id";
+                        $count_query = mysqli_query($conn, $sql2);
+
                     }
 
+              
+                    ?>
 
 
-               ?>
-                
+
+
                 <!-- Comments Form -->
                 <div class="well">
                     <h4>Leave a Comment:</h4>
@@ -121,7 +128,7 @@
                     </a>
                     <div class="media-body">
                         <h4 class="media-heading"><?php echo $row['comment_author']; ?>
-                            <small><?php echo $row['comment_date']; ?></small>
+                            <small><?php echo date('M d, Y',strtotime($row['comment_date'])); ?> at <?php echo date('h:i A',strtotime($row['comment_date'])); ?></small>
                         </h4>
                      <?php echo $row['comment_content']; ?>
                     </div>

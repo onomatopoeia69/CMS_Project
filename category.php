@@ -21,7 +21,7 @@
             $cat_id = $_GET['category'];
 
 
-            $sql = "Select * FROM posts WHERE post_category_id=$cat_id";
+            $sql = "Select * FROM posts WHERE post_category_id=$cat_id ORDER BY post_date DESC";
             $select_all_post= mysqli_query($conn,$sql);
             } ?>
         
@@ -43,12 +43,12 @@
 
                 <!-- First Blog Post -->
                 <h2>
-                    <a href="post.php?post_id=<?php echo $row['post_id'];?>"><?php echo $row['post_title'];    ?></a>
+                    <a href="post.php?post_id=<?php echo $row['post_id'];?>"><?php echo $row['post_title']; ?></a>
                 </h2>
                 <p class="lead">
                     by <a href="index.php"><?php echo $row['post_author'];?></a>
                 </p>
-                <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo  $row['post_date']; ?></p>
+                <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo  date('M d Y',strtotime($row['post_date'])); ?></p>
                 <hr>
                 <img class="img-responsive" src="image/<?=$row['post_image']; ?>" alt="">
                 <hr>
