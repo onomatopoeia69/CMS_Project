@@ -47,8 +47,16 @@
                     ?>
 
                    <?php  while($row= mysqli_fetch_assoc($select_category)): ?>
+
+                    <?php 
+
+                        $id = $row['cat_id'];
+                        $title = $row['cat_title'];
+
+
+                    ?>
                             
-                            <li><a href="category.php?category=<?php echo $row['cat_id']; ?>"><?php echo $row['cat_title']; ?></a>
+                            <li><a href="category.php?category=<?php echo $id; ?>"><?php echo $title; ?></a>
                             </li>
                             <?php endwhile; ?> 
                     </ul>

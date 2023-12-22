@@ -31,6 +31,20 @@
     
                  while($row= mysqli_fetch_assoc($select_all_post)):?>
 
+                 <?php 
+
+
+                    $id = $row['post_id'];
+                    $title = $row['post_title'];
+                    $author = $row['post_author'];
+                    $date = $row['post_date'];
+                    $image = $row['post_image'];
+                    $post_content = $row['post_content'];
+
+
+
+                    ?>
+
                 <h1 class="page-header">
                     Page Heading
                     <small>Secondary Text</small>
@@ -38,16 +52,16 @@
 
                 <!-- First Blog Post -->
                 <h2>
-                    <a href="post.php?post_id=<?php echo $row['post_id'];?>"><?php echo $row['post_title'];    ?></a>
+                    <a href="post.php?post_id=<?php echo $id;?>"><?php echo $title;    ?></a>
                 </h2>
                 <p class="lead">
-                    by <a href="index.php"><?php echo $row['post_author'];?></a>
+                    by <a href="index.php"><?php echo $author ;?></a>
                 </p>
-                <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo  date('M d Y',strtotime($row['post_date'])); ?></p>
+                <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo  date('M d Y',strtotime($date)); ?></p>
                 <hr>
-                <img class="img-responsive" src="image/<?=$row['post_image']; ?>" alt="">
+                <img class="img-responsive" src="image/<?=$image; ?>" alt="">
                 <hr>
-                <p><?php echo substr($row['post_content'],0,50); ?></p>
+                <p><?php echo substr($post_content,0,50); ?></p>
                 <a class="btn btn-primary" href="">Read More<span class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>

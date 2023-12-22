@@ -15,16 +15,12 @@
        
                 <?php $a= insertCat($conn);  ?>
 
-            
-
                 <!-- deleting in categories database -->
                     
                     <?php   deleteCat($conn);     ?>
-
                 
                 <!-- selecting all categories in database -->
                 
-
                     <?php  $c = GetCatData($conn);  ?>
 
                     
@@ -89,15 +85,24 @@
 
                             <!-- table body -->
                             <?php while($row = mysqli_fetch_assoc($c)) : ?>
+
+
+                                <?php 
+
+                                  $cat_id =$row['cat_id'];
+                                  $title = $row['cat_title'];
+
+
+                                ?>
                            
                             <tbody>
                            
                                 <tr>
 
-                                    <td><?php echo $row['cat_id'];?></td>
-                                    <td><?php echo $row['cat_title'];?></td>
-                                    <td><a href="categories.php?delete=<?php echo $row['cat_id'];?>">Delete</a></td>
-                                    <td><a href="categories.php?edit=<?php echo $row['cat_id'];?>">Edit</a></td>
+                                    <td><?php echo $cat_id;?></td>
+                                    <td><?php echo $title;?></td>
+                                    <td><a href="categories.php?delete=<?php echo $cat_id;?>">Delete</a></td>
+                                    <td><a href="categories.php?edit=<?php echo $cat_id;?>">Edit</a></td>
                                 </tr>
                                 <?php endwhile; ?>
                             </tbody>
