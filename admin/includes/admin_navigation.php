@@ -49,40 +49,38 @@
                         <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo2"><i class="fa fa-fw fa-arrows-v"></i> Post<i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo2"><i class="fa fa-fw fa-pencil-square-o"></i> Post<i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo2" class="collapse">
                             <li>
-                                <a href="posts.php?source=add_post">Add Post</a>
+                                <a href="posts.php?source=add_post"><i class="fa fa-fw fa-plus"></i> Post</a>
                             </li>
                             <li>
-                                <a href="posts.php"> View Post</a>
+                                <a href="posts.php"><i class="fa fa-fw fa-eye"></i> View Post</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="categories.php"><i class="fa fa-fw fa-wrench"></i> Categories</a>
+                        <a href="categories.php"><i class="fa fa-fw fa-windows"></i> Categories</a>
                     </li>
                     <li class="active">
-                        <a href="comments.php"><i class="fa fa-fw fa-file"></i> Comments</a>
+                        <a href="comments.php"><i class="fa fa-fw fa-comment"></i> Comments</a>
                     </li>
+    
                     <li>
-                        <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> Users</a>
-                    </li>
-                    <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Users<i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-users"></i> Users<i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="users.php?source=add_user">Add Users</a>
+                            <a href="users.php?source=add_user"><i class="fa fa-fw fa-plus"></i>Add Users</a>
                             </li>
                             <li>
-                                <a href="users.php">View Users</a>
+                            <a href="users.php"><i class="fa fa-fw fa-eye"></i> View Users</a>
                             </li>
                             <li>
                        
                         </ul>
                     </li>
                     <li>
-                    <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> Profile</a>
+                    <a href="index-rtl.html"><i class="fa fa-fw fa-user"></i> Profile</a>
                     </li>
                 </ul>
             </div>

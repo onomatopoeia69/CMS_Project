@@ -1,146 +1,173 @@
 
-<?php 
-
-if(isset($_GET['edit'])) {
-
-    $id = $_GET['edit'];
-
-
-$sql = "SELECT * FROM posts where post_id= $id";
-$post_value = mysqli_query($conn, $sql);
-
-
-}
-
-
-?>
-
-<?php $a= GetCatData($conn);?>
 
 
 <?php       
 
-if(isset($_POST['update_post'])){
+if(isset($_POST['update_user'])){
 
 $id = $_GET['edit'];
-$title = $_POST['title'];
-$category= $_POST['category']; 
-$author = $_POST['author'];
-$status = $_POST['post_status'];
-$image = $_FILES['image']['name'];
-$image_file = $_FILES['image']['tmp_name'];
-$tags = $_POST['post_tags'];
-$content = $_POST['post_content'];
+$username = $_POST['username'];
+$user_firstname= $_POST['user_firstname']; 
+$user_lastname = $_POST['user_lastname'];
+$password= $_POST['password'];
+$email = $_POST['email'];
+$role = $_POST['user_role'];
+
+// $image = $_FILES['image']['name'];
+// $image_file = $_FILES['image']['tmp_name'];
 
 
-move_uploaded_file($image_file,"../image/$image");  
+// move_uploaded_file($image_file,"../image/$image");  
 
 
 
-if(empty($image)){
+// if(empty($image)){
 
    
-$sql = "SELECT * FROM posts where post_id= $id";
-$select_image = mysqli_query($conn, $sql);
+// $sql = "SELECT * FROM posts where post_id= $id";
+// $select_image = mysqli_query($conn, $sql);
 
 
 
 
-while ($row = mysqli_fetch_assoc($select_image)){
+// while ($row = mysqli_fetch_assoc($select_image)){
 
 
-$post_image = $row['post_image'];
-
-
-
-}
+// $post_image = $row['post_image'];
 
 
 
-}
+// }
 
 
 
+$sql  = "UPDATE users SET user_firstname = '$user_firstname', user_lastname='$user_lastname', username= '$username',
+        user_role='$role',email= '$email', password= '$password' WHERE user_id = $id";
+$user_update = mysqli_query($conn,$sql);
 
-
-
-
-
-$sql  = "UPDATE posts SET post_title = '$title', post_category_id=$category, post_author= '$author',
-        post_status='$status', post_tags= '$tags', post_image= '$image', post_content='$content' where post_id = $id";
-$post_update = mysqli_query($conn,$sql);
-
-header("Location: posts.php");
+header("Location: users.php");
 
   
 
 }
 
+?>
 
 
 
-?> 
+
+
+            <?php 
+
+            if(isset($_GET['edit'])) {
+
+                $id = $_GET['edit'];
+
+
+            $sql = "SELECT * FROM users where user_id= $id";
+            $user = mysqli_query($conn, $sql);
+
+
+                }
+            ?>
 
 
 
-<?php while($row = mysqli_fetch_assoc($post_value)): ?>
+
+<?php while($row = mysqli_fetch_assoc($user)): ?>
+
+    <?php 
+
+           $username = $row['username'];
+           $password = $row['password'];
+           $firstname = $row['user_firstname'];
+           $lastname = $row['user_lastname'];
+           $email = $row['email'];
+           $role = $row['user_role'];
+
+    ?>
 
 <form action="" method="post" enctype="multipart/form-data">
 
 <div class="form-group">
-<label for="title">Post Title</label>
-<input type="text" class="form-control"  name="title"   value="<?php echo $row['post_title'];?>">
+<label for="title">First Name</label>
+<input type="text" class="form-control"  name="user_firstname"   value="<?php echo $username; ?>">
 </div>
+
+
+<div class="form-group">
+<label for="title">Last Name</label>
+<input type="text" class="form-control" name="user_lastname"  value="<?php echo $lastname;?>">
+</div>
+
+
+<div class="form-group">
+<label for="title">Username</label>
+<input type="text" class="form-control"  value="<?php echo $username;?>" name="username">
+</div>
+
+
 
 <div class="form-group">
 
 
-<select name="category" >
 
-<?php while($rowInner= mysqli_fetch_assoc($a)){ ?>
+<div class="form-group">
 
-<option value="<?php echo $rowInner['cat_id']; ?>"><?php echo $rowInner['cat_title']; ?></option>
-<?php } ?>
 
-</select>
+    <select name="user_role" >
+
+
+
+
+    <option value="<?php echo $role; ?>"><?php echo $role; ?></option>
+
+
+
+            <!-- condition if the user already a admin the option will be only subscriber -->
+
+    <?php 
+    
+        if($role == "admin"): ?> 
+
+           <option value="subscriber">subscriber</option>
+
+            <?php else:?>
+
+            <option value="admin">admin</option>
+
+        <?php endif; ?>
+
+
+
+
+    </select>
 
 </div>
 
 
 
+
+<!-- 
 <div class="form-group">
 <label for="title">Post Author</label>
-<input type="text" class="form-control" name="author"  value="<?php echo $row['post_author'];?>">
+<input type="text" class="form-control" name="author"  value="<">
+</div> -->
+
+<div class="form-group">
+<label for="title">Email</label>
+<input type="text" class="form-control"  value="<?php echo $email;?>" name="email">
 </div>
 
 <div class="form-group">
-<label for="title">Post Status</label>
-<input type="text" class="form-control"  value="<?php echo $row['post_status'];?>" name="post_status">
-</div>
-
-<div class="form-group">
-<label for="title">Post Images</label>
-<input type="file" name="image">
-<img width="300 " src="../image/<?php echo $row['post_image']?>" alt="image">
-</div>
-
-<div class="form-group">
-<label for="title">Post Tags</label>
-<input type="text" class="form-control" name="post_tags" value="<?php echo $row['post_tags']; ?>">
-</div>
-
-
-
-<div class="form-group">
-<label for="title">Post Content</label>
-<textarea type="text" class="form-control" name="post_content"  id="" cols="30" rows="10" ><?php echo $row['post_content'];?>
-</textarea>
+<label for="title">Password</label>
+<input type="password" class="form-control" name="password" value="<?php echo $password; ?>">
 </div>
 
 
 <div class="form-group">
 
-<input class="btn btn-primary"  type="submit" name="update_post"  value="Publish Post">
+<input class="btn btn-primary"  type="submit" name="update_user"  value="UPDATE USER">
 
 
 <?php endwhile; ?>

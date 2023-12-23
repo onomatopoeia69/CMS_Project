@@ -248,3 +248,60 @@
 
      }
 
+
+     function deleteUser($conn){
+
+        
+        if(isset($_GET['delete'])){
+
+            $id = $_GET['delete'];
+
+
+            $sql = "DELETE FROM users WHERE user_id ='$id' ";
+            $delete_cat = mysqli_query($conn, $sql);
+            header("Location: users.php");
+
+            if(!$delete_cat){
+
+                die('QUERY FAILED'.mysqli_error($conn));
+
+            }
+
+        }  
+
+     }
+
+
+     function ChangetoAdmin($conn){
+
+
+        if(isset($_GET['admin'])){
+
+        $id = $_GET['admin'];
+
+        $sql = "UPDATE users SET user_role ='admin' WHERE user_id = $id ";
+        mysqli_query($conn,$sql);
+        header("Location: users.php");
+
+        }
+       
+     }
+
+
+     
+     function ChangetoSubscriber($conn){
+
+
+        if(isset($_GET['subscriber'])){
+
+        $id = $_GET['subscriber'];
+
+        $sql = "UPDATE users SET user_role ='subscriber' WHERE user_id = $id ";
+        mysqli_query($conn,$sql);
+        header("Location: users.php");
+
+        }
+       
+     }
+
+

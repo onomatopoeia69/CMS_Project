@@ -1,32 +1,28 @@
 <?php 
 
 
-        if(isset($_POST['create_post'])){
+        if(isset($_POST['create_user'])){
 
-            $title = $_POST['title'];
-            $post_cat_id = $_POST['category_id'];
-            $post_author = $_POST['author'];
-            $post_status = $_POST['post_status'];
-
-            $post_image = $_FILES['image']['name'];  // from the array image , you can see the name
-            $post_image_temp = $_FILES['image']['tmp_name']; // image location
-
-
-            $post_tags = $_POST['post_tags'];
-            $post_content = $_POST['post_content'];
-            $post_date = date('d-m-y');  // the date today, month and year
-            // $post_comment_count = 4;
+            $firstname = $_POST['user_firstname'];
+            $lastname = $_POST['user_lastname'];
+            $role = $_POST['user_role'];
+            $username = $_POST['username'];
+            $email = $_POST['email'];
+            $password= $_POST['user_password'];
+            // $post_date = date('d-m-y');  // the date today, month and year
+         
+         
 
            
-         move_uploaded_file($post_image_temp,"../image/$post_image");  // moving the file from the its source to the image folder (param: temp_folder, where it transfer)
+        //  move_uploaded_file($post_image_temp,"../image/$post_image");  // moving the file from the its source to the image folder (param: temp_folder, where it transfer)
 
             
-            $sql = "INSERT INTO posts (post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_status) 
-                    VALUES ( $post_cat_id,'$title', '$post_author',now(),'$post_image', '$post_content','$post_tags','$post_status' )";
+            $sql = "INSERT INTO users (username, password, user_firstname, user_lastname, user_role, email, date) 
+                    VALUES ('$username','$password', '$firstname','$lastname', '$role','$email',NOW() )";
 
-            $create_posts = mysqli_query($conn,$sql);
+            $create_users= mysqli_query($conn,$sql);
 
-            if(!$create_posts){
+            if(!$create_users){
 
                 die("QUERY FAILED.".mysqli_error($conn));
 
@@ -61,19 +57,10 @@
 
         <select name="user_role" >
 
-        
-        <?php $a= GetUsersData($conn);?>
+            <option value="subscriber">SELECT OPTION</option>
+            <option value="admin">ADMIN</option>
+            <option value="subscriber">SUBSCRIBER</option>
 
-        <?php while($row= mysqli_fetch_assoc($a)) : ?>
-            <?php
-                $user_id = $row['user_id'];
-                $role= $row['user_role'];
-                
-            ?>
-
-        <option value="<?php echo $user_id; ?>"><?php echo $role; ?></option>
-
-        <?php endwhile; ?>
 
             </select>
 
@@ -105,6 +92,6 @@
         
         <div class="form-group">
            
-            <input class="btn btn-primary"  type="submit" name="add_user"  value="Add User">
+            <input class="btn btn-primary"  type="submit" name="create_user"  value="Add User">
         </div>
         </form>
