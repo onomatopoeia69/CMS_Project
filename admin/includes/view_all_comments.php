@@ -40,7 +40,7 @@
                                 <th>Response</th>
                                 <th>Date & Time</th>
                                 <th>Approve</th>
-                                <th>UnApprove</th>
+                                <th>Unapprove</th>
                                 <th>Delete</th>
                              
                             </tr>
@@ -103,9 +103,9 @@
                             <td><?php echo $date;?></td>
 
                             
-                            <td><a href="comments.php?approve=<?php echo $id;?>">Approve</a></td>
-                            <td><a href="comments.php?unapprove=<?php echo $id;?>">Unapprove</a></td>
-                            <td><a href="comments.php?delete=<?php echo $id; ?>">Delete</a></td>
+                            <td><a href="comments.php?approve=<?php echo $id;?>"><i class="fa fa-fw fa-check"></i>Approve</a></td>
+                            <td><a href="comments.php?unapprove=<?php echo $id;?>"><i class="fa fa-fw fa-cross"></i>Unapprove</a></td>
+                            <td><a href="comments.php?delete=<?php echo $id; ?>"><i class="fa fa-fw fa-trash"></i>Delete</a></td>
                            
 
                     </tr>

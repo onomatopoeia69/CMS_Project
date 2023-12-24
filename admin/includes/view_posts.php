@@ -86,8 +86,8 @@
                             <td><?php echo $post_comment_count;?></td>
 
                             <td><?php echo $date;?></td>
-                            <td><a href="posts.php?delete=<?php echo $id;?>">Delete</a></td>
-                            <td><a href="posts.php?source=edit_post&edit=<?php echo $id; ?>">Edit</a></td>
+                            <td><a href="posts.php?delete=<?php echo $id;?>"><i class="fa fa-fw fa-trash"></i>Delete</a></td>
+                            <td><a href="posts.php?source=edit_post&edit=<?php echo $id; ?>"><i class="fa fa-fw fa-edit"></i>Edit</a></td>
                         
                     </tr>
                      </tbody>
