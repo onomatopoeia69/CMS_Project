@@ -53,31 +53,18 @@
                             <td><?php echo $firstname;?></td>
                             <td><?php echo $lastname;?></td>
                             <td><?php echo $email;?></td>
-                            
-                           
                             <td><?php echo $role;?></td>
-
                             <td><?php echo date('M d Y',strtotime($date));?></td>
-
-                            
                                 <!-- change into admin -->
-
                              <?php ChangetoAdmin($conn);    ?> 
- 
                             <td><a href=users.php?admin=<?php  echo $id;    ?>>Admin</a></td>
-
                                 <!-- change into subscriber -->
-
                             <?php ChangetoSubscriber($conn);    ?> 
                             <td><a href=users.php?subscriber=<?php  echo $id;   ?>>Subscriber</a></td>
-
                                 <!-- delete the user -->
-
                             <?php deleteUser($conn); ?>
                             <td><a href=users.php?delete=<?php echo $id; ?>>Delete</a></td>
-
                             <!-- edit the user information -->
-
                             <td><a href=users.php?source=edit_user&edit=<?php  echo $id; ?>>Edit</a></td>
 
                            

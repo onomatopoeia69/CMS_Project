@@ -17,9 +17,6 @@
 
 
     // }
-
-
-
    $conn = mysqli_connect(HOST,USER,PASS,NAME);
 
 

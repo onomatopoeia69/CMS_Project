@@ -10,7 +10,7 @@
             $title = $_POST['cat_title'];
             $error= array();
 
-
+                
 
             if(empty($title)){
 
@@ -30,11 +30,11 @@
                     }
 
 
-            }
+            }   
 
-            }
-     }
-
+        }
+     
+    }
 
      // deleting the categories in the database
 
@@ -302,6 +302,21 @@
 
         }
        
+     }
+
+     function Num_Posts($conn){
+
+
+        
+
+        $sql = "SELECT * FROM posts";
+        $all_posts = mysqli_query($conn, $sql);
+
+        $num_posts = mysqli_num_rows($all_posts);
+
+
+        return $num_posts;
+
      }
 
 

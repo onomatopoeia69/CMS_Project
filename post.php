@@ -59,7 +59,7 @@
 
                         $post_id = $_GET['post_id'];
                         $email = $_POST['comment_email'];
-                        $comment_content = $_POST['comment'];
+                        $comment_content = mysqli_real_escape_string($conn, $_POST['comment']);
                         $comment_author = $_POST['comment_author'];
 
 
@@ -145,7 +145,6 @@
                 </div>
 
                 <?php endwhile; ?>
-
 
 
                 <!-- Comment -->
