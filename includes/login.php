@@ -34,16 +34,19 @@
                    $db_email =  $row['email'];
                    $db_date = $row['date'];
                    $db_id = $row['user_id'];
+                   
+                   $password_hashed = password_verify($password,$db_password);
               
 
                }
-               
 
-                if ($username == $db_username && $password == $db_password){
+                
+
+                if ($username == $db_username && $password == $db_password  ||  $username == $db_username && $password_hashed === true ){
 
 
                         $_SESSION['id'] = $db_id;
-                        $_SESSION['username'] = $db_firstname;
+                        $_SESSION['username'] = $db_username;
                         $_SESSION['role'] = $db_role;
                         
                         header("Location: ../admin");

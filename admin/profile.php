@@ -38,7 +38,19 @@
                     <div class="col-lg-12">
                         <h1 class="page-header">
                             HELLO ADMIN
-                            <small><?php echo $firstname;  ?> </small> </h1>
+                            <small>
+
+                            <?php if(isset($_SESSION['username'])){
+                            
+                            
+                            echo $_SESSION['username']; 
+
+
+                           }
+                            
+                            ?>
+
+                                </small> </h1>
 
 
 

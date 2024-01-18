@@ -33,7 +33,20 @@
                     <div class="col-lg-12">
                         <h1 class="page-header">
                             HELLO ADMIN
-                            <small>Author</small>
+                            <small>
+                                
+                   <?php if(isset($_SESSION['username'])){
+                            
+                            
+                            echo $_SESSION['username']; 
+
+
+                   }
+                            
+                            ?>
+                        
+                        
+                        </small>
                             </h1>
 
                             <!-- add category form -->
@@ -101,7 +114,7 @@
 
                                     <td><?php echo $cat_id;?></td>
                                     <td><?php echo $title;?></td>
-                                    <td><a href="categories.php?delete=<?php echo $cat_id;?>">Delete</a></td>
+                                    <td><a onclick="return confirm('Are you sure you want to Delete <?php ?>?')"  href="categories.php?delete=<?php echo $cat_id;?>">Delete</a></td>
                                     <td><a href="categories.php?edit=<?php echo $cat_id;?>">Edit</a></td>
                                 </tr>
                                 <?php endwhile; ?>

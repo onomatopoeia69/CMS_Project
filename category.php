@@ -21,7 +21,7 @@
             $cat_id = $_GET['category'];
 
 
-            $sql = "Select * FROM posts WHERE post_category_id=$cat_id ORDER BY post_date DESC";
+            $sql = "Select * FROM posts WHERE post_category_id= $cat_id AND post_status = 'Published' ORDER BY post_date DESC";
             $select_all_post= mysqli_query($conn,$sql);
             } ?>
         
@@ -29,12 +29,10 @@
 
                 <h1>NO RESULTS</h1>
 
-
-
             <?php else: ?>
                 
 
-           <?php   while($row= mysqli_fetch_assoc($select_all_post)):?>
+           <?php  while($row= mysqli_fetch_assoc($select_all_post)):?>
 
             <?php 
 
@@ -63,7 +61,7 @@
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo  date('M d Y',strtotime($date)); ?></p>
                 <hr>
-                <img class="img-responsive" src="image/<?=$image; ?>" alt="">
+                <a href="post.php?post_id=<?php echo $id; ?>"><img class="img-responsive" src="image/<?=$image; ?>" alt=""></a>
                 <hr>
                 <p><?php echo $content; ?></p>
                 <a class="btn btn-primary" href="#">Read More<span class="glyphicon glyphicon-chevron-right"></span></a>

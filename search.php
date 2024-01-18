@@ -11,11 +11,6 @@
             <!-- Blog Entries Column -->
             <div class="col-md-8">
 
-            
-
-          
-
-
 
             <!-- searching to the database -->
 
@@ -24,17 +19,18 @@
 
             $search = htmlspecialchars($_POST['search']);
 
-            $sql = "SELECT * FROM posts WHERE CONCAT_WS('',post_title,post_author,post_tags) LIKE '%$search%' ";
+            $sql = "SELECT * FROM posts WHERE CONCAT_WS('',post_title,post_author,post_tags) LIKE '%$search%'  AND  post_status = 'Published'";
             $search_query = mysqli_query($conn, $sql); 
+            $num_rows= mysqli_num_rows($search_query);
   
-            if(mysqli_num_rows($search_query) == 0 ){
+            if($num_rows == 0 ){
 
 
                 echo "<h1>No results</h1>";
 
             }else{ 
 
-                echo "<h1>Search Results</h1>";
+                echo "<h1>Search Results({$num_rows})</h1>";
 
                     while($row= mysqli_fetch_assoc($search_query)):?>
 
@@ -58,7 +54,6 @@
                         </h1>
 
                            
-        
                         <!-- First Blog Post -->
                         <h2>
                             <a href="post.php?post_id=<?php echo $id;?>"><?php echo $title;   ?></a>
@@ -68,7 +63,7 @@
                         </p>
                         <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo  $date; ?></p>
                         <hr>
-                        <img class="img-responsive" src="image/<?=$image; ?>" alt="">
+                        <a href="post.php?post_id=<?php echo $id ; ?>"> <img class="img-responsive" src="image/<?=$image; ?>" alt=""></a>
                         <hr>
                         <p><?php echo $content; ?></p>
                         <a class="btn btn-primary" href="#">Read More<span class="glyphicon glyphicon-chevron-right"></span></a>

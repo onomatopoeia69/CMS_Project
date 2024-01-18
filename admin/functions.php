@@ -123,7 +123,7 @@
 
       function GetPostData($conn){
                 
-        $sql = "SELECT * FROM posts"; 
+        $sql = "SELECT * FROM posts ORDER BY post_id DESC"; 
         $post_query = mysqli_query($conn, $sql); 
         return $post_query;
 

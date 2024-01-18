@@ -9,7 +9,7 @@
                 <h4>Blog Search</h4>
                 <form action="search.php" method="post">
                 <div class="input-group">
-                    <input type="text" name="search" class="form-control">
+                    <input type="text" name="search" class="form-control" placeholder="search author, titles ...">
                     <span class="input-group-btn">
                         <button name="submit" class="btn btn-default" type="submit">
                             <span class="glyphicon glyphicon-search"></span>
@@ -22,9 +22,10 @@
             </div>
 
 
+         <!-- Login -->
+    <!-- trying to hide the login form when the admin successfully login and not hide when the user login   -->
+    <?php if(!isset($_SESSION['id']) || $_SESSION['role'] == 'subscriber'){ ?>  
 
-
-            <!-- Login -->
          <div class="well">
 
                 <h4>LOGIN</h4>
@@ -47,13 +48,7 @@
                 </div>
                 <!-- /.input-group -->
            
-
-            
-
-
-
-
-
+       <?php  } ?>
 
 
             <!-- Blog Categories Well -->
@@ -68,12 +63,20 @@
                     <div class="col-lg-12">
                     <ul class="list-unstyled">
 
+
+                    <?php 
+                                $sql = "SELECT * FROM category WHERE cat_title = 'PHP' ";
+                                $select_category = mysqli_query($conn,$sql);
+                                $php_num_rows = mysqli_num_rows($select_category);
+                    ?>
                   
                     
                     <?php 
                                 $sql = "SELECT * FROM category";
+                             
                                 $select_category = mysqli_query($conn,$sql);
-
+                     
+                               
                     ?>
 
                    <?php  while($row= mysqli_fetch_assoc($select_category)): ?>
@@ -82,13 +85,17 @@
 
                         $id = $row['cat_id'];
                         $title = $row['cat_title'];
-
-
+                        
+                       
                     ?>
-                            
-                            <li><a href="category.php?category=<?php echo $id; ?>"><?php echo $title; ?></a>
-                            </li>
-                            <?php endwhile; ?> 
+
+
+                  <li><a href="category.php?category=<?php echo $id; ?>"><?php echo $title ;?></a>
+                  </li>
+
+
+                  <?php endwhile; ?> 
+
                     </ul>
                 
                     </div>

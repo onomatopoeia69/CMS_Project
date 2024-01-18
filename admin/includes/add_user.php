@@ -22,21 +22,12 @@
 
             $create_users= mysqli_query($conn,$sql);
 
-            if(!$create_users){
-
-                die("QUERY FAILED.".mysqli_error($conn));
-
-
-            }
-
-
+           echo "<script> alert('User Created!')</script>; ";
 
         }
 
 
-
-
-?> 
+        ?> 
 
 <form action="" method="post" enctype="multipart/form-data">
 

@@ -1,4 +1,4 @@
- 
+ <?php session_start();?>
  <!-- Navigation -->
  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -12,7 +12,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">CMS HOME</a>
+                <a class="navbar-brand"  href="index.php"><i class="glyphicon glyphicon-home"></i></a>
             </div>
 
             
@@ -39,7 +39,42 @@
                     <li>
                         <a href="admin/index.php">ADMIN</a>
                     </li>
-                </ul>
+
+                    <li>
+                        <a href="registration.php">Register</a>
+                    </li>
+
+                   
+               
+         <?php 
+
+
+               
+                
+                if(isset($_SESSION['role']) && $_SESSION['role'] === 'admin'){
+
+
+                    if(isset($_GET['post_id'])){
+
+
+                  ?>
+
+
+                   <li>
+                        <a href="admin/posts.php?source=edit_post&edit=<?php echo $_GET['post_id']; ?>">Edit Post</a>
+                 </li>
+                   
+
+                   
+                
+               <?php } 
+                    }
+             ?>
+                    
+                    
+            
+               </ul>
+
             </div>
            
            

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Charts</title>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function getRandomColor() {
+      var letters = '0123456789ABCDEF';
+      var color = '#';
+      for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['Category', 'Value', { role: 'style' }],
+        ['A', 20, getRandomColor()],
+        ['B', 40, getRandomColor()],
+        ['C', 60, getRandomColor()],
+        ['D', 80, getRandomColor()],
+        ['E', 100, getRandomColor()]
+      ]);
+
+      var options = {
+        title: 'Bar Chart with Random Colors',
+        legend: 'none'
+      };
+
+      var chart = new google.visualization.BarChart(document.getElementById('barchart'));
+
+      chart.draw(data, options);
+    }
+  </script>
+</head>
+<body>
+  <div id="barchart" style="width: 400px; height: 300px;"></div>
+</body>
+</html>

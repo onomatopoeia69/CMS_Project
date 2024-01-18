@@ -105,7 +105,7 @@
                             
                             <td><a href="comments.php?approve=<?php echo $id;?>"><i class="fa fa-fw fa-check"></i>Approve</a></td>
                             <td><a href="comments.php?unapprove=<?php echo $id;?>"><i class="fa fa-fw fa-close"></i>Unapprove</a></td>
-                            <td><a href="comments.php?delete=<?php echo $id; ?>"><i class="fa fa-fw fa-trash"></i>Delete</a></td>
+                            <td><a  onclick="return confirm('Are you sure you want to Delete <?php ?>?')"  href="comments.php?delete=<?php echo $id; ?>"><i class="fa fa-fw fa-trash"></i>Delete</a></td>
                            
 
                     </tr>

@@ -39,10 +39,12 @@ $role = $_POST['user_role'];
 
 // }
 
+    $option = array('diff' => 11);
+    $password_hashed = password_hash($password, PASSWORD_BCRYPT, $option);
 
 
 $sql  = "UPDATE users SET user_firstname = '$user_firstname', user_lastname='$user_lastname', username= '$username',
-        user_role='$role',email= '$email', password= '$password' WHERE user_id = $id";
+        user_role='$role',email= '$email', password= '$password_hashed' WHERE user_id = $id";
 $user_update = mysqli_query($conn,$sql);
 
 header("Location: users.php");
@@ -173,3 +175,5 @@ header("Location: users.php");
 <?php endwhile; ?>
 </div>
 </form>
+
+

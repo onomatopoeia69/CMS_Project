@@ -2,6 +2,7 @@
 <?php include_once 'includes/db.php'; ?> 
 <?php include_once 'includes/header.php'; ?> 
 <?php include_once 'includes/navigation.php'; ?> 
+
    
     <!-- Page Content -->
     <div class="container">
@@ -16,7 +17,7 @@
 
             <?php 
 
-            $sql = "Select * FROM posts WHERE post_status= 'Published' ORDER BY post_date DESC ";
+            $sql = "Select * FROM posts WHERE post_status='Published' ORDER BY post_id DESC ";
             $select_all_post= mysqli_query($conn,$sql);
            
             ?>
@@ -55,14 +56,18 @@
                     <a href="post.php?post_id=<?php echo $id;?>"><?php echo $title;    ?></a>
                 </h2>
                 <p class="lead">
-                    by <a href="index.php"><?php echo $author ;?></a>
+                    by <a href="author_post.php?post_name=<?php  echo $author;  ?>"><?php echo $author ;?></a>
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> Posted on <?php echo  date('M d Y',strtotime($date)); ?></p>
                 <hr>
-                <img class="img-responsive" src="image/<?=$image; ?>" alt="">
+
+
+
+                <a href="post.php?post_id=<?php echo $id;?>"><img class="img-responsive" src="image/<?=$image; ?>" alt=""></a>
+
                 <hr>
                 <p><?php echo substr($post_content,0,50); ?></p>
-                <a class="btn btn-primary" href="">Read More<span class="glyphicon glyphicon-chevron-right"></span></a>
+                <a class="btn btn-primary" href="post.php?post_id=<?php echo $id;?>">Read More<span class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
 
