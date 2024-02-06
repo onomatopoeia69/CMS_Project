@@ -31,6 +31,7 @@
             $image_file = $_FILES['image']['tmp_name'];
             $tags = $_POST['post_tags'];
             $content = $_POST['post_content'];
+            $view_posts = $_POST['view_posts'];
 
 
            
@@ -45,21 +46,25 @@
            while ($row = mysqli_fetch_assoc($select_image)){
 
 
+                // image that already in database
             $image = $row['post_image'];
 
 
-            }}else{
+            }
+        
+             }else{
 
-
+            // image that is updated
             $image = $_FILES['image']['name'];
 
             }
 
+            //moving the file 
             move_uploaded_file($image_file,"../image/$image");  
 
 
             $sql  = "UPDATE posts SET post_title = '$title', post_category_id=$category, post_author= '$author',
-                    post_status='$status', post_tags= '$tags', post_image= '$image', post_content='$content' where post_id = $id";
+                    post_status='$status', post_tags= '$tags', post_image= '$image', post_content='$content', post_view_counts= $view_posts  where post_id = $id";
             $post_update = mysqli_query($conn,$sql);
 
 
@@ -89,6 +94,7 @@
             $post_status=  $row['post_status'];
             $image = $row['post_image'];
             $content = $row['post_content'];
+            $views = $row['post_view_counts']
 
 
 
@@ -144,9 +150,7 @@
 
             $sql = "SELECT * FROM posts";
             $recent_status = mysqli_query($conn, $sql);
-            
-
-        
+       
            ?> 
       
 
@@ -175,8 +179,17 @@
 
         <!-- <div class="form-group">
             <label for="title">Post Status</label>
-            <input type="text" class="form-control"  value="<?php echo $post_status;?>" name="post_status">
+            <input type="text" class="form-control"  value="" name="post_status">
         </div> -->
+
+
+
+        <div class="form-group">
+            <label for="title">Post Views</label>
+            <input type="number" class="form-control" name="view_posts" value="<?php echo $views; ?>">
+        </div>
+
+
 
         <div class="form-group">
             <label for="title">Post Images</label>

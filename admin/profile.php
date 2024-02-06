@@ -60,6 +60,8 @@
                 if(isset($_POST['update_profile'])){
 
 
+                    
+                
                     $firstname = $_POST['user_firstname'];
                     $lastname = $_POST['user_lastname'];
                     $username = $_POST['username'];
@@ -67,8 +69,13 @@
                     $email = $_POST['email'];
                     $password = $_POST['password'];
 
+                    $option = array('diff' => 10);
+                    $password_hashed = password_hash($password, PASSWORD_BCRYPT, $option);
+
+
+
                     
-          $sql = "UPDATE users SET username = '$username', password = '$password', user_firstname = '$firstname', user_lastname = '$lastname',
+          $sql = "UPDATE users SET username = '$username', password = '$password_hashed', user_firstname = '$firstname', user_lastname = '$lastname',
                 user_role = '$role', email = '$email' WHERE user_id = $id";
 
                 mysqli_query($conn, $sql);
@@ -91,7 +98,6 @@
 
 
             $sql = "SELECT * FROM users WHERE user_id = $id ";
-
             $user_info = mysqli_query($conn, $sql);
         ?>
 

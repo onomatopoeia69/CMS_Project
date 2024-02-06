@@ -36,9 +36,15 @@
                     
                 <?php endforeach; ?>
 
+
+                <?php if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin' ): ?>
+                    
                     <li>
                         <a href="admin/index.php">ADMIN</a>
                     </li>
+                    
+                 <?php endif; ?>
+
 
                     <li>
                         <a href="registration.php">Register</a>

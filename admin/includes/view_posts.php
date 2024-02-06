@@ -3,6 +3,7 @@
        
         <?php $b = GetPostData($conn); ?>
         <?php deletePost($conn); ?>
+        <?php ResetViews($conn); ?>
 
 
 
@@ -83,6 +84,17 @@
                         
                     break;
 
+
+
+                        case 'Reset_Views':
+
+
+                            $sql = "UPDATE posts SET post_view_counts = 0 WHERE post_id = $array1[$i] ";
+                            $reset = mysqli_query($conn, $sql);   
+                            header("Location: posts.php");
+
+                           break;
+
                     
 
                     }
@@ -115,6 +127,7 @@
                         <option value="Draft">DRAFT</option>
                         <option value="Delete">DELETE</option>
                         <option value="Clone">CLONE</option>
+                        <option value="Reset_Views">RESET VIEWS</option>
 
                         
                     </select>
@@ -144,9 +157,11 @@
                                 <th>Tags</th>
                                 <th>Comments</th>
                                 <th>Date</th>
+                                <th>Views</th>
                                 <th>Delete</th>
                                 <th>Edit</th>
                                 <th>View Post</th>
+                              
 
 
                               
@@ -169,7 +184,7 @@
                             $tags = $row_Post['post_tags'];
                             $post_comment_count = $row_Post['post_comment_count'];
                             $date = $row_Post['post_date'];
-
+                            $view_counts = $row_Post['post_view_counts'];
 
                         ?>
                     <tr>
@@ -181,6 +196,10 @@
 
 
 
+                            <!-- getting the category title  -->
+
+
+
                           <?php 
                             
                             $sql = "SELECT * FROM category WHERE cat_id = $post_category_id ";
@@ -188,7 +207,9 @@
 
                             ?>
 
-                            <?php while($row_Cat = mysqli_fetch_assoc($cat_query)):?>
+                    <?php while($row_Cat = mysqli_fetch_assoc($cat_query)):?>
+
+
                                 <?php 
 
                                 $cat_title = $row_Cat['cat_title'];
@@ -199,17 +220,39 @@
 
                                    <?php endwhile; ?> 
 
+
+                                <!-- end of getting the category title -->
+
+
                             <td><?php echo $status;?></td>
 
                             <td><img width='100' src="../image/<?php echo $image;?>"></td>
 
                             <td><?php echo $tags;?></td>
 
-                            <td><?php echo $post_comment_count;?></td>
+
+                            <!-- getting the comment number of the post using the connected keys in the post -->
+
+
+                            <?php 
+                            
+                                $sql = "SELECT * FROM comments WHERE comment_post_id = $id ";
+                                $comment_query = mysqli_query($conn, $sql);
+                                $comment_num_post = mysqli_num_rows($comment_query); 
+
+                            ?>
+                            
+                            <td><a href="comments.php?source=post_all_comments&post_id=<?php echo $id; ?>"><?php echo $comment_num_post;?></a></td>
 
                             <td><?php echo $date;?></td>
+
+                            <td><a onclick="return confirm('Are you sure you want to reset your <?php echo $view_counts;?> views ?')"  href="posts.php?reset=<?php echo $id;?>"><?php echo $view_counts; ?></td>
+
+
                             <td><a onclick="return confirm('Are you sure you want to Delete <?php ?>?')"  href="posts.php?delete=<?php echo $id;?>"><i class="fa fa-fw fa-trash"></i>Delete</a></td>
+
                             <td><a href="posts.php?source=edit_post&edit=<?php echo $id; ?>"><i class="fa fa-fw fa-edit"></i>Edit</a></td>
+
                             <td><a href="../post.php?post_id=<?php echo $id; ?>"><i class="fa fa-fw fa-edit"></i>View Post</a></td>
                             
 

@@ -3,21 +3,23 @@
 <?php session_start(); ?>
 
 
+            
 
-<?php 
-   
-         if(!isset($_SESSION['role'])  || $_SESSION['role'] == 'subscriber')   {
+            
+
+            <?php 
+                
+                if(!isset($_SESSION['role'])  || $_SESSION['role'] == 'subscriber')   {
 
 
-      
-         header("Location: ../index.php");
- 
 
-        }
+                header("Location: ../index.php");
 
-    
-?>
 
+                }
+
+
+            ?>
 
 
 
@@ -33,7 +35,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Kuya Kar Admin - Bootstrap Admin Template</title>
+    <title>Kuya Kar</title>
 
     
 

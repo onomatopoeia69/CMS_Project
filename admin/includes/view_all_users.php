@@ -1,4 +1,53 @@
 
+
+
+
+
+            <?php 
+                
+                    $sql  = "SELECT * FROM users ";
+                    $all_users = mysqli_query($conn, $sql);
+                    $users_row = mysqli_num_rows($all_users);
+                    
+                    $per_page = 5;
+                    $count  = ceil( $users_row / $per_page);
+
+
+
+            
+            ?>
+                <?php 
+
+
+                        if(isset($_GET['page'])){
+
+
+                            $page = $_GET['page'];     
+
+
+                        }else{
+
+                            $page = 0 ;
+
+                        }
+
+                        if($page == 0 || $page == 1){
+
+
+                            $offset = 1;
+
+                        }else{
+
+                            $offset = ($page * $per_page) - $per_page;
+
+                        }
+
+
+                ?>
+
+
+
+
     <?php 
     
 
@@ -54,23 +103,9 @@
 
                 }
 
-
-
-
-
-
-
-
             }
     
-    
-    
-    
-    
-    
-    
-    
-    
+     
     
     ?>
 
@@ -107,7 +142,7 @@
      <div class="col-xs-4">
  
      <input type="submit" name="submit"  class="btn btn-success" onclick="return confirm('Do you want to apply this changes ?')" value="APPLY CHANGES">
-     <a class="btn btn-primary" href="./posts.php?source=add_post">ADD NEW</a>
+     <a class="btn btn-primary" href="./users.php?source=add_user">ADD NEW</a>
     
     
                         <thead>
@@ -118,14 +153,10 @@
                                 <th>Username</th>
                                 <th>Firstname</th>
                                 <th>Lastname</th>
-                                <th>Email</th>
-                            
+                                <th>Email</th>     
                                 <th>Role</th>
                                 <th>Date</th>
-                               
-
-
-                              
+                        
                             </tr>
                         </thead>
                    
@@ -133,8 +164,8 @@
                    
                     <tbody>
 
-                        <?php $b = GetUsersData($conn); ?>
-                     <?php while($row_User = mysqli_fetch_assoc($b)):?>
+                        <?php $users_data = GetUsersDataLimit($conn, $per_page, $offset); ?>
+                     <?php while($row_User = mysqli_fetch_assoc($users_data)):?>
                      
 
 
@@ -174,13 +205,46 @@
                             <!-- edit the user information -->
                             <td><a href=users.php?source=edit_user&edit=<?php  echo $id; ?>>Edit</a></td>
 
-                           
+                   
                         
                     </tr>
                      </tbody>
                     <?php endwhile; ?>
+
+
                     </table>   
                     
+               
+             <ul class="pager">
+
+
+                        <li><?php echo isset($_GET['page']) ? $page : "1"; ?> of <?php echo $count; ?></li><br>
+
+                
+                <?php if($page > 1): ?>
+
+                        
+                            <li><a href="users.php?page=<?php echo $page - 1  ?>"> << </a></li>
+
+
+                <?php endif; ?>
+
+                <?php  for($i=1; $i <= $count ; $i++): ?>
+
+                         <li><a href="users.php?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+
+                <?php endfor; ?>
+
+                <?php   if($page < $count):    ?>
+
+
+                         <li><a href="users.php?page=<?php echo isset($_GET['page'])? $page + 1 : $page + 2 ; ?>"> >> </a></li>
+
+                <?php endif; ?>
+
+
+                </ul>
+ 
 
 
   

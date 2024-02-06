@@ -1,8 +1,6 @@
     <?php   include  'db.php'; ?>
     <?php session_start(); ?>
     
-    
-
 
     <?php 
 
@@ -54,7 +52,7 @@
 
                     }else{
 
-                        header("Location: ../admin");
+                        header("Location: ../index.php");
 
                     }
 

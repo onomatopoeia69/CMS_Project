@@ -44,8 +44,6 @@
                     $content = $row['post_content'];
 
 
-
-             
                 ?>
 
                 <h1 class="page-header">

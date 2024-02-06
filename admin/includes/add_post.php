@@ -62,8 +62,7 @@
         </div>
 
         <div class="form-group">
-
-
+        <label for="title">Category ID</label>
         <select name="category_id" >
 
         
@@ -86,14 +85,18 @@
         </div>
 
         <div class="form-group">
+            
             <label for="title">Post Author</label>
             <input type="text" class="form-control" name="author">
+
+        
         </div>
 
 
                         
             <div class="form-group">
 
+            <label for="title">Post Status</label>
 
             <select name="post_status" >
 

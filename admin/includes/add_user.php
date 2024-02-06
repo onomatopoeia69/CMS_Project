@@ -10,6 +10,10 @@
             $email = $_POST['email'];
             $password= $_POST['user_password'];
             // $post_date = date('d-m-y');  // the date today, month and year
+
+
+            $option = array('diff' => 10);
+            $password_hashed = password_hash($password, PASSWORD_BCRYPT, $option);
          
          
 
@@ -18,7 +22,7 @@
 
             
             $sql = "INSERT INTO users (username, password, user_firstname, user_lastname, user_role, email, date) 
-                    VALUES ('$username','$password', '$firstname','$lastname', '$role','$email',NOW() )";
+                    VALUES ('$username','$password_hashed', '$firstname','$lastname', '$role','$email',NOW() )";
 
             $create_users= mysqli_query($conn,$sql);
 

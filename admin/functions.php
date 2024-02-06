@@ -173,7 +173,7 @@
       function GetCommentData($conn){
 
 
-        $sql = "SELECT * FROM comments";
+        $sql = "SELECT * FROM comments ";
         $comments_query = mysqli_query($conn,$sql);
 
         return $comments_query;
@@ -206,6 +206,36 @@
         }  
 
      }
+
+
+     function ResetViews($conn){
+
+        
+        if(isset($_GET['reset'])){
+
+            $id = $_GET['reset'];
+
+
+            $sql = "UPDATE posts SET post_view_counts = 0 WHERE post_id = $id ";
+            $reset_views = mysqli_query($conn, $sql);   
+            header("Location: posts.php");
+
+
+            if(!$reset_views){
+
+                die('QUERY FAILED'.mysqli_error($conn));
+
+            }
+
+
+           
+
+        }  
+
+     }
+
+
+
 
 
 
@@ -311,7 +341,6 @@
 
         $sql = "SELECT * FROM posts";
         $all_posts = mysqli_query($conn, $sql);
-
         $num_posts = mysqli_num_rows($all_posts);
 
 
@@ -320,3 +349,88 @@
      }
 
 
+     function GetUsersDataLimit($conn, $per_page, $offset){
+                
+        $sql = "SELECT * FROM users LIMIT $offset,$per_page "; 
+        $post_query = mysqli_query($conn, $sql); 
+        return $post_query;
+
+     }
+
+
+
+
+
+
+
+     function redirect($location)
+
+        {
+
+        return header(header: "Location:" . $location);
+
+        };
+
+
+
+
+        function users_online($conn){
+          // session id 
+          $session  = session_id();
+
+          // time = unix time stamp 
+          $time = time();
+          // seconds 
+          $seconds = 70;
+
+          // time out when the seconds elapsed
+          $session_timeout = $time - $seconds;  
+
+
+          // select * rows (time and session) when there is session in database
+          $session_sql = "SELECT * FROM users_online WHERE session = '$session' ";
+          $query = mysqli_query($conn, $session_sql);
+          $users_session_count = mysqli_num_rows($query);
+          
+              // if user is not already registered or new user
+              
+          if($users_session_count == 0){
+
+              //this will make a new session id
+              $insert_session_sql = "INSERT INTO users_online (session, time) VALUES ('$session', $time)";
+              mysqli_query($conn, $insert_session_sql);
+
+          }else{
+                  // if it is already existing it will set new time (the current time) in their session id
+              $existing_session = "UPDATE users_online SET time= $time WHERE session = '$session' ";
+              mysqli_query($conn, $existing_session);
+
+          }
+
+              // selecting all rows where the current time stamp is greater than the set timeout that indicate offline
+
+              $users_online = "SELECT * FROM users_online WHERE time > $session_timeout";
+              $online = mysqli_query($conn, $users_online);
+
+                  while($user = mysqli_fetch_assoc($online)){
+
+                      $_SESSION['online'] = $user['session'];
+
+           }
+
+
+          // delete the row where the time is less than the session timeout or offline
+              $sql4="DELETE FROM users_online WHERE time < $session_timeout";
+              mysqli_query($conn,$sql4);
+
+
+              $online_sql = "SELECT * FROM users_online WHERE session != '$session' ";
+                 $users_online_query = mysqli_query($conn, $online_sql);
+                        $num_online_users = mysqli_num_rows($users_online_query);
+
+                        return $num_online_users;
+
+        }
+      
+
+      ?>

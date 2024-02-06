@@ -39,8 +39,25 @@ $role = $_POST['user_role'];
 
 // }
 
-    $option = array('diff' => 11);
-    $password_hashed = password_hash($password, PASSWORD_BCRYPT, $option);
+        if(!empty($password)){
+
+            $pass_sql  = "SELECT password FROM users WHERE user_id = $id";
+            $pass_query = mysqli_query($conn, $pass_sql);
+
+
+            $db_password = mysqli_fetch_assoc($pass_query);
+
+
+        }
+
+
+            if($db_password != $password){
+
+                 $option = array('diff' => 11);
+                $password_hashed = password_hash($password, PASSWORD_BCRYPT, $option);
+
+            }
+
 
 
 $sql  = "UPDATE users SET user_firstname = '$user_firstname', user_lastname='$user_lastname', username= '$username',
@@ -163,7 +180,7 @@ header("Location: users.php");
 
 <div class="form-group">
 <label for="title">Password</label>
-<input type="password" class="form-control" name="password" value="<?php echo $password; ?>">
+<input type="password" class="form-control" name="password" autocomplete="off">
 </div>
 
 

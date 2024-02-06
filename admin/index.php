@@ -2,8 +2,73 @@
 <?php include 'includes/admin_header.php';?>
 <?php include 'functions.php';?>
 
+
+
+
+               
        
     <div id="wrapper">
+
+
+
+            <?php 
+                
+                // session id 
+                $session  = session_id();
+
+                // time = unix time stamp 
+                $time = time();
+                // seconds 
+                $seconds = 30;
+
+                // time out when the seconds elapsed
+                $session_timeout = $time - $seconds;  
+
+
+                // select * rows (time and session) when there is session in database
+                $session_sql = "SELECT * FROM users_online WHERE session = '$session' ";
+                $query = mysqli_query($conn, $session_sql);
+                $users_session_count = mysqli_num_rows($query);
+                
+                    // if user is not already registered or new user
+                    
+                if($users_session_count == 0){
+
+                    //this will make a new session id
+                    $insert_session_sql = "INSERT INTO users_online (session, time) VALUES ('$session', $time)";
+                    mysqli_query($conn, $insert_session_sql);
+
+                }else{
+                        // if it is already existing it will set new time (the current time) in their session id
+                    $existing_session = "UPDATE users_online SET time= $time WHERE session = '$session' ";
+                    mysqli_query($conn, $existing_session);
+
+                }
+
+                    // selecting all rows where the current time stamp is greater than the set timeout that indicate offline
+
+                    $users_online = "SELECT * FROM users_online WHERE time > $session_timeout";
+                    $online = mysqli_query($conn, $users_online);
+
+                        while($user = mysqli_fetch_assoc($online)){
+
+                            $_SESSION['online'] = $user['session'];
+
+                 }
+
+
+                // delete the row where the time is less than the session timeout or offline
+                    $sql4="DELETE FROM users_online WHERE time < $session_timeout";
+                    $result4=mysqli_query($conn,$sql4);
+
+
+            
+                
+                
+            
+
+            ?>
+
 
 
 
@@ -32,8 +97,11 @@
 
 
                    }
+                   
                             
                             ?>
+
+            
                         
                         </small>
                             </h1>
@@ -396,6 +464,15 @@
         <!-- pie chart for number of users -->
 
         </div>
+
+
+
+
+
+
+
+<!-- 
+                    pie graph of demographics -->
 
 
         <div class="row">
