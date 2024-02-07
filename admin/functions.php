@@ -5,6 +5,9 @@
 
         function insertCat($conn){
 
+
+            
+
             if(isset($_POST['add_category'])){
  
             $title = $_POST['cat_title'];
@@ -150,6 +153,13 @@
     function deletePost($conn){
 
         
+        if(isset($_SESSION['role'])){
+
+
+
+            if($_SESSION['role'] == 'admin'){
+
+
         if(isset($_GET['delete'])){
 
             $id = $_GET['delete'];
@@ -165,9 +175,15 @@
 
             }
 
+            }
+            
+        }
+
         }  
 
      }
+
+
 
 
       function GetCommentData($conn){
